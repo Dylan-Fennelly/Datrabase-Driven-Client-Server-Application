@@ -3,8 +3,8 @@ package org.application.dto;
 public class Gun
 {
     private int id;
-    private String Name;
-    private String Type;
+    private String name;
+    private String type;
     private int ammoCapacity;
     private float damage;
     private float rateOfFire;
@@ -18,8 +18,8 @@ public class Gun
     public Gun(int id, String Name, String Type, int ammoCapacity, float damage, float rateOfFire, float weight, float reloadTime, float accuracy, float recoil, int attachmentSlots, int price)
     {
         this.id = id;
-        this.Name = Name;
-        this.Type = Type;
+        this.name = Name;
+        this.type = Type;
         this.ammoCapacity = ammoCapacity;
         this.damage = damage;
         this.rateOfFire = rateOfFire;
@@ -38,12 +38,12 @@ public class Gun
 
     public String getName()
     {
-        return Name;
+        return name;
     }
 
     public String getType()
     {
-        return Type;
+        return type;
     }
 
     public int getAmmoCapacity()
