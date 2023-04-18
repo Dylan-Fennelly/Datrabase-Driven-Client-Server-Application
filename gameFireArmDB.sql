@@ -1,13 +1,14 @@
 CREATE TABLE weapon (
-    weapon_id INT PRIMARY KEY,
+    weapon_id INT AUTO_INCREMENT PRIMARY KEY,
     weapon_name VARCHAR(255),
     weapon_type VARCHAR(255),
     ammo_capacity INT,
-    damage DECIMAL(4,2),
-    rate_of_fire DECIMAL(4,2),
+    damage INT,
+    rate_of_fire INT,
     weight DECIMAL(4,2),
     reload_time DECIMAL(4,2),
 	accuracy DECIMAL(4,2),
+	range_of_effectiveness INT,
 	recoil DECIMAL(4,2),
     attachment_slots INT,
 	price INT
@@ -25,8 +26,10 @@ CREATE TABLE attachment (
 	price INT
 );
 CREATE TABLE custom_weapon (
-    custom_weapon_id INT PRIMARY KEY,
-    custom_weapon_name VARCHAR(255)
+    custom_weapon_id INT AUTO_INCREMENT PRIMARY KEY,
+    custom_weapon_name VARCHAR(255),
+	weapon_id VARCHAR(255),
+	FOREIGN KEY (weapon_id) REFERENCES weapon(weapon_id)
 );
 CREATE TABLE custom_weapon_attachments (
     custom_weapon_id INT,
@@ -46,7 +49,7 @@ VALUES (1, 'Red Dot Sight', 'Sight', 0.50, 10.00, 5.00, 0.00, 0.00, 0.00, 100);
 
 --To create a custom weapon with attachments:
 --First, insert a new custom weapon into the "custom_weapon" table
-INSERT INTO custom_weapon (custom_weapon_id, custom_weapon_name)
+INSERT INTO custom_weapon (weapon_id, custom_weapon_name)
 VALUES (1, 'Custom AK-47');
 
 --Next, insert the attachments for the custom weapon into the "custom_weapon_attachments" table

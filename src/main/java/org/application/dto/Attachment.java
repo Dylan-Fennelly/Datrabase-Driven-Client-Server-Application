@@ -76,4 +76,6 @@ public Attachment(int id, String name, String type, float weight, float accuracy
     {
         return price;
     }
+
+
 }

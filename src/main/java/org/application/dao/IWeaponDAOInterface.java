@@ -1,14 +1,14 @@
 package org.application.dao;
 
-import org.application.dto.Gun;
+import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
 import java.util.List;
 
-public interface IGunDAOInterface
+public interface IWeaponDAOInterface
 {
-    public List<Gun> findAllGuns() throws DAOException;
-//    public Gun findGunById(int id);
+    public List<Weapon> findAllGuns() throws DAOException;
+    public Weapon findGunById(int id) throws DAOException;
 //    public Gun deleteGunById(int id);
 //    public Gun insertGun(Gun gun);
 //    //list the entites using a filter

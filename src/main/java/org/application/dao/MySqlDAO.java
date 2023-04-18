@@ -11,9 +11,9 @@ public class MySqlDAO
 public Connection getConnection() throws DAOException
     {
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/gameFireArmDB";
-        String username = "Main";
-        String password = System.getenv("MYSQL_PASSWORD");
+        String url = "jdbc:mysql://localhost:3306/gamefirearmdb";
+        String username = "Dylan";
+        String password = "Blacklockbox99!";
         Connection con = null;
         try
         {

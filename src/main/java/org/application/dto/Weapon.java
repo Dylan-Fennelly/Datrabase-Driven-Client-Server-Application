@@ -1,31 +1,33 @@
 package org.application.dto;
 
-public class Gun
+public class Weapon
 {
     private int id;
     private String name;
     private String type;
     private int ammoCapacity;
-    private float damage;
-    private float rateOfFire;
+    private int damage;
+    private int rateOfFire;
     private float weight;
     private float reloadTime;
     private float accuracy;
+    private int range;
     private float recoil;
     private int attachmentSlots;
     private int price;
 
-    public Gun(int id, String Name, String Type, int ammoCapacity, float damage, float rateOfFire, float weight, float reloadTime, float accuracy, float recoil, int attachmentSlots, int price)
+    public Weapon(int id, String name, String type, int ammoCapacity, int damage, int rateOfFire, float weight, float reloadTime, float accuracy, int range, float recoil, int attachmentSlots, int price)
     {
         this.id = id;
-        this.name = Name;
-        this.type = Type;
+        this.name = name;
+        this.type = type;
         this.ammoCapacity = ammoCapacity;
         this.damage = damage;
         this.rateOfFire = rateOfFire;
         this.weight = weight;
         this.reloadTime = reloadTime;
         this.accuracy = accuracy;
+        this.range = range;
         this.recoil = recoil;
         this.attachmentSlots = attachmentSlots;
         this.price = price;
@@ -56,7 +58,7 @@ public class Gun
         return damage;
     }
 
-    public float getRateOfFire()
+    public int getRateOfFire()
     {
         return rateOfFire;
     }
@@ -89,5 +91,12 @@ public class Gun
     public int getPrice()
     {
         return price;
+    }
+
+    //To string
+    @Override
+    public String toString()
+    {
+        return "Gun{" + "id=" + id + ", name=" + name + ", type=" + type + ", ammoCapacity=" + ammoCapacity + ", damage=" + damage + ", rateOfFire=" + rateOfFire + ", weight=" + weight + ", reloadTime=" + reloadTime + ", accuracy=" + accuracy + ", range=" + range + ", recoil=" + recoil + ", attachmentSlots=" + attachmentSlots + ", price=" + price + '}';
     }
 }
