@@ -3,6 +3,7 @@ package org.application;
 import org.application.dao.Attachment.AttachmentComparator;
 import org.application.dao.Attachment.IAttachmentDAOInterface;
 import org.application.dao.Attachment.MySqlAttachmentDao;
+import org.application.dao.CustomWeapon.MySqlCustomWeaponDAO;
 import org.application.dao.Weapon.IWeaponDAOInterface;
 import org.application.dao.Weapon.MySqlWeaponDAO;
 import org.application.dao.Weapon.WeaponComparator;
@@ -19,8 +20,8 @@ public class App
         System.out.println(gunDAO.findGunById(3));
         gunDAO.deleteGunById(3);
         System.out.println(gunDAO.findAllGuns());
-        Weapon m4 = new Weapon( "M4", "Assault Rifle", 30, 30, 800, 7.5f, 2.5f, 0.5f, 500, 0.5f, 3, 1500);
-        if(gunDAO.insertGun(m4))
+        Weapon m4 = new Weapon("M4", "Assault Rifle", 30, 30, 800, 7.5f, 2.5f, 0.5f, 500, 0.5f, 3, 1500);
+        if (gunDAO.insertGun(m4))
         {
             System.out.println("M4 inserted successfully");
         }
@@ -35,13 +36,16 @@ public class App
         System.out.println(attachmentDAO.getAllAttachments());
         System.out.println(attachmentDAO.getAttachmentById(3));
         attachmentDAO.deleteAttachmentById(3);
-        Attachment miniDot = new Attachment("Mini Dot", "Sight",0f,5f,
-                0f,0,0,0,50);
-        if(attachmentDAO.insertAttachment(miniDot))
+        Attachment miniDot = new Attachment("Mini Dot", "Sight", 0f, 5f,
+                0f, 0, 0, 0, 50);
+        if (attachmentDAO.insertAttachment(miniDot))
         {
             System.out.println("Mini Dot inserted successfully");
         }
         System.out.println(attachmentDAO.getAttachmentsByFilter(AttachmentComparator.PRICE_COMPARATOR));
-    }
 
+        MySqlCustomWeaponDAO customWeaponDAO = new MySqlCustomWeaponDAO();
+        System.out.println(customWeaponDAO.getAllCustomWeapons());
+        System.out.println(customWeaponDAO.getCustomWeaponById(3));
+    }
 }

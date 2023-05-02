@@ -13,11 +13,13 @@ import java.util.*;
 
 public class MySqlAttachmentDao extends MySqlDAO implements IAttachmentDAOInterface
 {
-    private HashSet<Integer> idCache = new HashSet<>();
+    private HashSet<Integer> idCache;
 
 public MySqlAttachmentDao() throws DAOException
 {
+
         super();
+        this.idCache = new HashSet<>();
         Connection con = null;
         try
         {
