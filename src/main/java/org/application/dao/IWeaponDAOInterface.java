@@ -4,6 +4,7 @@ import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
 import java.sql.Connection;
+import java.util.Comparator;
 import java.util.List;
 
 public interface IWeaponDAOInterface
@@ -17,10 +18,9 @@ public interface IWeaponDAOInterface
 
     String findGunByIdJSON(int id) throws DAOException;
 
-    //This method is used to update the cache of gun ids that are in the database
-    //It returns true if the cache was updated successfully, or false if it was not.
+
 //    //list the entites using a filter
-//    public List<Gun> findGunsByFilter(String filter);
+    public List<Weapon> findGunsByFilter(Comparator comparator) throws DAOException;
 
 
 }

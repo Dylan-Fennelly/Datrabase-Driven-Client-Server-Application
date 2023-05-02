@@ -2,6 +2,7 @@ package org.application;
 
 import org.application.dao.IWeaponDAOInterface;
 import org.application.dao.MySqlWeaponDAO;
+import org.application.dao.WeaponComparator;
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
@@ -22,5 +23,8 @@ public class App
         System.out.println(gunDAO.findAllGuns());
         System.out.println(gunDAO.findAllGunsJSON());
         System.out.println(gunDAO.findGunByIdJSON(1));
+
+        System.out.println(gunDAO.findGunsByFilter(WeaponComparator.PRICE_COMPARATOR));
+        System.out.println(gunDAO.findGunsByFilter(WeaponComparator.DAMAGE_COMPARATOR));
     }
 }

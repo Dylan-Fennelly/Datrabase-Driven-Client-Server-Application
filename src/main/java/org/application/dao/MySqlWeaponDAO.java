@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
 {
@@ -258,6 +256,14 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         Weapon g = findGunById(id);
         Gson gson = new Gson();
         return gson.toJson(g);
+    }
+
+    @Override
+    public List<Weapon> findGunsByFilter(Comparator comparator) throws DAOException
+    {
+        List<Weapon> weapons = findAllGuns();
+        Collections.sort(weapons, comparator);
+        return weapons;
     }
 
 }
