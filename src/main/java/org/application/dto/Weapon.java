@@ -32,6 +32,22 @@ public class Weapon
         this.attachmentSlots = attachmentSlots;
         this.price = price;
     }
+    public Weapon(String name, String type, int ammoCapacity, int damage, int rateOfFire, float weight, float reloadTime, float accuracy, int range, float recoil, int attachmentSlots, int price)
+    {
+        this.id = -1;
+        this.name = name;
+        this.type = type;
+        this.ammoCapacity = ammoCapacity;
+        this.damage = damage;
+        this.rateOfFire = rateOfFire;
+        this.weight = weight;
+        this.reloadTime = reloadTime;
+        this.accuracy = accuracy;
+        this.range = range;
+        this.recoil = recoil;
+        this.attachmentSlots = attachmentSlots;
+        this.price = price;
+    }
 
     public int getId()
     {

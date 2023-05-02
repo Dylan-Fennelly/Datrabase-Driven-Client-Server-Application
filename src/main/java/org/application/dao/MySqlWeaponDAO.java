@@ -8,10 +8,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
 {
+    //The hashset is used to store the ids of the guns that are within the database
+    private HashSet<Integer> gunIds = new HashSet<>();
+
+    public MySqlWeaponDAO() throws DAOException
+    {
+        super();
+        Connection con = null;
+        try
+        {
+             con = this.getConnection();
+            this.updateIDCache(con);
+        }
+        catch (SQLException e)
+        {
+            throw new DAOException("MySqlWeaponDAO() " + e.getMessage());
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
+
+    }
     @Override
     public List<Weapon> findAllGuns() throws DAOException
     {
@@ -50,6 +73,7 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         }
         finally
         {
+
             this.freeConnection(con);
         }
         return weapons;
@@ -58,6 +82,10 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
     @Override
     public Weapon findGunById(int id) throws DAOException
     {
+        if(!gunIds.contains(id))
+        {
+            System.out.println("Gun with id " + id + " does not exist");
+        }
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -132,8 +160,10 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         }
         finally
         {
+            updateIDCache(con);
             this.freeConnection(con);
         }
+
         return deleted;
     }
 
@@ -177,9 +207,37 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         }
         finally
         {
+            updateIDCache(con);
             this.freeConnection(con);
         }
+
         return inserted;
     }
 
+    //This method is used to update the cache of gun ids that are in the database
+    //It returns true if the cache was updated successfully, or false if it was not.
+    @Override
+    public void updateIDCache(Connection con) throws DAOException
+    {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        gunIds.clear();
+        try
+        {
+            con = this.getConnection();
+            String query = "SELECT * FROM weapon";
+            ps = con.prepareStatement(query);
+            rs = ps.executeQuery();
+            while (rs.next())
+            {
+                int id = rs.getInt("weapon_id");
+                gunIds.add(id);
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
 }

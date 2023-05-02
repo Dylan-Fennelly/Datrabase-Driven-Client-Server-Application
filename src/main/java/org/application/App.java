@@ -14,8 +14,11 @@ public class App
         System.out.println(gunDAO.findGunById(3));
         gunDAO.deleteGunById(3);
         System.out.println(gunDAO.findAllGuns());
-        Weapon m4 = new Weapon(3, "M4", "Assault Rifle", 30, 30, 800, 7.5f, 2.5f, 0.5f, 500, 0.5f, 3, 1500);
-        gunDAO.insertGun(m4);
+        Weapon m4 = new Weapon( "M4", "Assault Rifle", 30, 30, 800, 7.5f, 2.5f, 0.5f, 500, 0.5f, 3, 1500);
+        if(gunDAO.insertGun(m4))
+        {
+            System.out.println("M4 inserted successfully");
+        }
         System.out.println(gunDAO.findAllGuns());
     }
 }
