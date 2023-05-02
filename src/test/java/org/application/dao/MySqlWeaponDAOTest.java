@@ -3,10 +3,9 @@ package org.application.dao;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.application.dao.MySqlWeaponDAO;
+import org.application.dao.Weapon.MySqlWeaponDAO;
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
-import org.junit.jupiter.api.*;
 
 import java.util.List;
 

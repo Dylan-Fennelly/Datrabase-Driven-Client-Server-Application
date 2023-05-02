@@ -14,7 +14,7 @@ CREATE TABLE weapon (
 	price INT
 );
 CREATE TABLE attachment (
-    attachment_id INT PRIMARY KEY,
+    attachment_id INT AUTO_INCREMENT PRIMARY KEY,
     attachment_name VARCHAR(255),
     attachment_type VARCHAR(255),
     weight DECIMAL(4,2),

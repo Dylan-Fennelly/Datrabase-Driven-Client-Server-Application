@@ -26,6 +26,19 @@ public Attachment(int id, String name, String type, float weight, float accuracy
         this.reloadTimeBonus = reloadTimeBonus;
         this.price = price;
     }
+    public Attachment(String name, String type, float weight, float accuracyBonus, float recoilBonus, float damageBonus, float rateOfFireBonus, float reloadTimeBonus, int price)
+    {
+        this.id = -1;
+        this.name = name;
+        this.type = type;
+        this.weight = weight;
+        this.accuracyBonus = accuracyBonus;
+        this.recoilBonus = recoilBonus;
+        this.damageBonus = damageBonus;
+        this.rateOfFireBonus = rateOfFireBonus;
+        this.reloadTimeBonus = reloadTimeBonus;
+        this.price = price;
+    }
 
     public int getId()
     {
@@ -75,6 +88,23 @@ public Attachment(int id, String name, String type, float weight, float accuracy
     public int getPrice()
     {
         return price;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Attachment{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", weight=" + weight +
+                ", accuracyBonus=" + accuracyBonus +
+                ", recoilBonus=" + recoilBonus +
+                ", damageBonus=" + damageBonus +
+                ", rateOfFireBonus=" + rateOfFireBonus +
+                ", reloadTimeBonus=" + reloadTimeBonus +
+                ", price=" + price +
+                '}';
     }
 
 

@@ -1,4 +1,4 @@
-package org.application.dao;
+package org.application.dao.Weapon;
 
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
@@ -18,8 +18,6 @@ public interface IWeaponDAOInterface
 
     String findGunByIdJSON(int id) throws DAOException;
 
-
-//    //list the entites using a filter
     public List<Weapon> findGunsByFilter(Comparator comparator) throws DAOException;
 
 

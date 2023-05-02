@@ -1,6 +1,7 @@
-package org.application.dao;
+package org.application.dao.Weapon;
 
 import com.google.gson.Gson;
+import org.application.dao.MySqlDAO;
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
@@ -21,7 +22,7 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         Connection con = null;
         try
         {
-             con = this.getConnection();
+            con = this.getConnection();
             this.updateIDCache(con);
         }
         catch (SQLException e)
@@ -84,6 +85,7 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         if(!gunIds.contains(id))
         {
             System.out.println("Gun with id " + id + " does not exist");
+            return null;
         }
         Connection con = null;
         PreparedStatement ps = null;
@@ -134,6 +136,11 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
     @Override
     public boolean deleteGunById(int id) throws DAOException
     {
+        if(!gunIds.contains(id))
+        {
+            System.out.println("Gun with id " + id + " does not exist");
+            return false;
+        }
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

@@ -1,4 +1,4 @@
-package org.application.dao;
+package org.application.dao.Weapon;
 
 import org.application.dto.Weapon;
 

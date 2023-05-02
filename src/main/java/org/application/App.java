@@ -1,8 +1,12 @@
 package org.application;
 
-import org.application.dao.IWeaponDAOInterface;
-import org.application.dao.MySqlWeaponDAO;
-import org.application.dao.WeaponComparator;
+import org.application.dao.Attachment.AttachmentComparator;
+import org.application.dao.Attachment.IAttachmentDAOInterface;
+import org.application.dao.Attachment.MySqlAttachmentDao;
+import org.application.dao.Weapon.IWeaponDAOInterface;
+import org.application.dao.Weapon.MySqlWeaponDAO;
+import org.application.dao.Weapon.WeaponComparator;
+import org.application.dto.Attachment;
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
@@ -26,5 +30,18 @@ public class App
 
         System.out.println(gunDAO.findGunsByFilter(WeaponComparator.PRICE_COMPARATOR));
         System.out.println(gunDAO.findGunsByFilter(WeaponComparator.DAMAGE_COMPARATOR));
+
+        IAttachmentDAOInterface attachmentDAO = new MySqlAttachmentDao();
+        System.out.println(attachmentDAO.getAllAttachments());
+        System.out.println(attachmentDAO.getAttachmentById(3));
+        attachmentDAO.deleteAttachmentById(3);
+        Attachment miniDot = new Attachment("Mini Dot", "Sight",0f,5f,
+                0f,0,0,0,50);
+        if(attachmentDAO.insertAttachment(miniDot))
+        {
+            System.out.println("Mini Dot inserted successfully");
+        }
+        System.out.println(attachmentDAO.getAttachmentsByFilter(AttachmentComparator.PRICE_COMPARATOR));
     }
+
 }
