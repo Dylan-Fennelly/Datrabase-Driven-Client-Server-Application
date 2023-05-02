@@ -4,6 +4,7 @@ import org.application.dto.CustomWeapon;
 import org.application.exceptions.DAOException;
 
 import java.sql.Connection;
+import java.util.Comparator;
 import java.util.List;
 
 public interface ICustomWeaponDAO
@@ -17,6 +18,6 @@ public interface ICustomWeaponDAO
 
     public String getAllCustomWeaponsJSON() throws DAOException;
     public String getCustomWeaponByIdJSON(int id) throws DAOException;
-    public List<CustomWeapon> getCustomWeaponsByFilter() throws DAOException;
+    public List<CustomWeapon> getCustomWeaponsByFilter(Comparator comparator) throws DAOException;
 
 }

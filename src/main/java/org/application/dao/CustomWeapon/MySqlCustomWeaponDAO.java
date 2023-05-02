@@ -1,5 +1,6 @@
 package org.application.dao.CustomWeapon;
 
+import com.google.gson.Gson;
 import org.application.dao.Attachment.MySqlAttachmentDao;
 import org.application.dao.MySqlDAO;
 import org.application.dao.Weapon.MySqlWeaponDAO;
@@ -168,15 +169,105 @@ public class MySqlCustomWeaponDAO extends MySqlDAO implements ICustomWeaponDAO
 
 
     @Override
-    public boolean deleteCustomWeaponById(int id) throws DAOException
-    {
-
+    public boolean deleteCustomWeaponById(int id) throws DAOException {
+        Connection con = null;
+        PreparedStatement ps = null;
+        int rowsDeleted = 0;
+        try
+        {
+            con = this.getConnection();
+            con.setAutoCommit(false);
+            String deleteAttachmentsQuery = "DELETE FROM custom_weapon_attachments WHERE custom_weapon_id = ?";
+            ps = con.prepareStatement(deleteAttachmentsQuery);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            String deleteCustomWeaponQuery = "DELETE FROM custom_weapon WHERE custom_weapon_id = ?";
+            ps = con.prepareStatement(deleteCustomWeaponQuery);
+            ps.setInt(1, id);
+            rowsDeleted = ps.executeUpdate();
+            con.commit();
+        }
+        catch (SQLException e)
+        {
+            try
+            {
+                if (con != null) con.rollback();
+            }
+            catch (SQLException ex)
+            {
+                throw new RuntimeException(ex);
+            }
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            updateIDCache(con);
+            this.freeConnection(con);
+        }
+        return rowsDeleted > 0;
     }
+
 
     @Override
     public boolean insertCustomWeapon(CustomWeapon customWeapon) throws DAOException
     {
-        return false;
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean success = false;
+        try
+        {
+            con = this.getConnection();
+            con.setAutoCommit(false);
+            String insertCustomWeaponQuery = "INSERT INTO custom_weapon (custom_weapon_name, weapon_id) VALUES (?, ?)";
+            ps = con.prepareStatement(insertCustomWeaponQuery);
+            ps.setString(1, customWeapon.getNickname());
+            ps.setInt(2, customWeapon.getOriginalWeapon().getId());
+            ps.executeUpdate();
+            String selectLastInsertIdQuery = "SELECT LAST_INSERT_ID()";
+            ps = con.prepareStatement(selectLastInsertIdQuery);
+            ResultSet rs = ps.executeQuery();
+            int customWeaponId = 0;
+            if (rs.next())
+            {
+                customWeaponId = rs.getInt(1);
+            }
+            for (Attachment a : customWeapon.getAttachments())
+            {
+                String insertAttachmentQuery = "INSERT INTO custom_weapon_attachments (custom_weapon_id, attachment_id) VALUES (?, ?)";
+                ps = con.prepareStatement(insertAttachmentQuery);
+                ps.setInt(1, customWeaponId);
+                ps.setInt(2, a.getId());
+                ps.executeUpdate();
+            }
+            con.commit();
+            success = true;
+        }
+        catch (SQLException e)
+        {
+            try
+            {
+                if (con != null) con.rollback();
+            }
+            catch (SQLException ex)
+            {
+                throw new RuntimeException(ex);
+            }
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            updateIDCache(con);
+            this.freeConnection(con);
+            try
+            {
+                if (ps != null) ps.close();
+            }
+            catch (SQLException e)
+            {
+                throw new RuntimeException(e);
+            }
+        }
+        return success;
     }
 
     @Override
@@ -208,18 +299,24 @@ public class MySqlCustomWeaponDAO extends MySqlDAO implements ICustomWeaponDAO
     @Override
     public String getAllCustomWeaponsJSON() throws DAOException
     {
-        return null;
+        List<CustomWeapon> customWeapons = getAllCustomWeapons();
+        Gson gson = new Gson();
+        return gson.toJson(customWeapons);
     }
 
     @Override
     public String getCustomWeaponByIdJSON(int id) throws DAOException
     {
-        return null;
+        CustomWeapon customWeapon = getCustomWeaponById(id);
+        Gson gson = new Gson();
+        return gson.toJson(customWeapon);
     }
 
     @Override
-    public List<CustomWeapon> getCustomWeaponsByFilter() throws DAOException
+    public List<CustomWeapon> getCustomWeaponsByFilter(Comparator comparator) throws DAOException
     {
-        return null;
+        List<CustomWeapon> customWeapons = getAllCustomWeapons();
+        Collections.sort(customWeapons, comparator);
+        return customWeapons;
     }
 }

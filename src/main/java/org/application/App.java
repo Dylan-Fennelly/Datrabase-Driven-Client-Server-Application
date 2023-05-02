@@ -47,5 +47,10 @@ public class App
         MySqlCustomWeaponDAO customWeaponDAO = new MySqlCustomWeaponDAO();
         System.out.println(customWeaponDAO.getAllCustomWeapons());
         System.out.println(customWeaponDAO.getCustomWeaponById(3));
+        if(customWeaponDAO.deleteCustomWeaponById(3))
+        {
+            System.out.println("Custom Weapon deleted successfully");
+        }
+        System.out.println(customWeaponDAO.getAllCustomWeapons());
     }
 }

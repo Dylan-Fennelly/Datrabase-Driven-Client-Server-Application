@@ -61,4 +61,31 @@ public class CustomWeapon
     {
         attachments.add(attachment);
     }
+    public int getPrice()
+    {
+        int price = originalWeapon.getPrice();
+        for(Attachment attachment : attachments)
+        {
+            price += attachment.getPrice();
+        }
+        return price;
+    }
+    public float getWeight()
+    {
+        float weight = originalWeapon.getWeight();
+        for(Attachment attachment : attachments)
+        {
+            weight += attachment.getWeight();
+        }
+        return weight;
+    }
+    public int getDamage()
+    {
+        int damage = originalWeapon.getDamage();
+        for(Attachment attachment : attachments)
+        {
+            damage += attachment.getDamageBonus();
+        }
+        return damage;
+    }
 }
