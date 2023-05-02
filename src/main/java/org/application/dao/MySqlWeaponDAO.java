@@ -90,10 +90,6 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
             }
 
         }
-        catch (DAOException e)
-        {
-            throw new RuntimeException(e);
-        }
         catch (SQLException e)
         {
             throw new RuntimeException(e);
@@ -104,4 +100,41 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         }
         return g;
     }
+
+    //The deleteGunById() method deletes a gun from the database by its id.
+    //It returns true if the gun was deleted successfully, or false if it was not.
+
+    @Override
+    public boolean deleteGunById(int id) throws DAOException
+    {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean deleted = false;
+
+        try
+        {
+            con = this.getConnection();
+            String query = "DELETE FROM weapon WHERE weapon_id = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            int rowsAffected = ps.executeUpdate();
+
+            if(rowsAffected > 0)
+            {
+                deleted = true;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
+        return deleted;
+    }
+
 }

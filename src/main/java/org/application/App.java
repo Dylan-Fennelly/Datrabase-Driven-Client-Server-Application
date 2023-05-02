@@ -11,5 +11,7 @@ public class App
         IWeaponDAOInterface gunDAO = new MySqlWeaponDAO();
         System.out.println(gunDAO.findAllGuns());
         System.out.println(gunDAO.findGunById(3));
+        gunDAO.deleteGunById(3);
+        System.out.println(gunDAO.findAllGuns());
     }
 }
