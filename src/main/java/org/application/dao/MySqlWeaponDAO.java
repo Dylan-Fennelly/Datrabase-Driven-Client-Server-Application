@@ -1,5 +1,6 @@
 package org.application.dao;
 
+import com.google.gson.Gson;
 import org.application.dto.Weapon;
 import org.application.exceptions.DAOException;
 
@@ -240,4 +241,23 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
             throw new RuntimeException(e);
         }
     }
+
+    //Finds all guns in the database and returns them as a JSON string
+    //Gson is used to convert the list of guns to a JSON string
+    @Override
+    public String findAllGunsJSON() throws DAOException
+    {
+        List<Weapon> weapons = findAllGuns();
+        Gson gson = new Gson();
+        return gson.toJson(weapons);
+
+    }
+    @Override
+    public String findGunByIdJSON(int id) throws DAOException
+    {
+        Weapon g = findGunById(id);
+        Gson gson = new Gson();
+        return gson.toJson(g);
+    }
+
 }

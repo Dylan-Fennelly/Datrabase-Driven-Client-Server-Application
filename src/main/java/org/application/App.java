@@ -20,5 +20,7 @@ public class App
             System.out.println("M4 inserted successfully");
         }
         System.out.println(gunDAO.findAllGuns());
+        System.out.println(gunDAO.findAllGunsJSON());
+        System.out.println(gunDAO.findGunByIdJSON(1));
     }
 }

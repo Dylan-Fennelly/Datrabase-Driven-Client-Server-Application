@@ -13,6 +13,9 @@ public interface IWeaponDAOInterface
     public boolean deleteGunById(int id) throws DAOException;
     public boolean insertGun(Weapon gun) throws DAOException;
     public void updateIDCache(Connection Con) throws DAOException;
+    public String findAllGunsJSON() throws DAOException;
+
+    String findGunByIdJSON(int id) throws DAOException;
 
     //This method is used to update the cache of gun ids that are in the database
     //It returns true if the cache was updated successfully, or false if it was not.
