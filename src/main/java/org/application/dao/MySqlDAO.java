@@ -1,5 +1,6 @@
 package org.application.dao;
 
+import org.application.Core.Colours;
 import org.application.exceptions.DAOException;
 
 import java.sql.Connection;
@@ -22,14 +23,14 @@ public Connection getConnection() throws DAOException
         }
         catch (ClassNotFoundException e)
         {
-            System.out.println("Class not found " + e.getMessage());
+            System.out.println(Colours.RED+ "Class not found " + e.getMessage() + Colours.RESET);
             System.exit(1);
         }
         catch (SQLException e)
         {
             System.out.println("Connection failed " + e.getMessage());
         }
-        System.out.println("Connection successful");
+        System.out.println(Colours.GREEN + "Connection successful" + Colours.RESET);
         return con;
     }
     public void freeConnection(Connection con) throws DAOException
@@ -44,7 +45,7 @@ public Connection getConnection() throws DAOException
         }
         catch (SQLException e)
         {
-            System.out.println("Failed to free the connection " + e.getMessage());
+            System.out.println(Colours.RED +"Failed to free the connection " + e.getMessage() + Colours.RESET);
             System.exit(1);
         }
     }
