@@ -53,7 +53,7 @@ public class Weapon
         return ammoCapacity;
     }
 
-    public float getDamage()
+    public int getDamage()
     {
         return damage;
     }
@@ -97,6 +97,25 @@ public class Weapon
     @Override
     public String toString()
     {
-        return "Gun{" + "id=" + id + ", name=" + name + ", type=" + type + ", ammoCapacity=" + ammoCapacity + ", damage=" + damage + ", rateOfFire=" + rateOfFire + ", weight=" + weight + ", reloadTime=" + reloadTime + ", accuracy=" + accuracy + ", range=" + range + ", recoil=" + recoil + ", attachmentSlots=" + attachmentSlots + ", price=" + price + '}';
+        return "Weapon{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", ammoCapacity=" + ammoCapacity +
+                ", damage=" + damage +
+                ", rateOfFire=" + rateOfFire +
+                ", weight=" + weight +
+                ", reloadTime=" + reloadTime +
+                ", accuracy=" + accuracy +
+                ", range=" + range +
+                ", recoil=" + recoil +
+                ", attachmentSlots=" + attachmentSlots +
+                ", price=" + price +
+                '}';
+    }
+
+    public int getRange()
+    {
+        return range;
     }
 }

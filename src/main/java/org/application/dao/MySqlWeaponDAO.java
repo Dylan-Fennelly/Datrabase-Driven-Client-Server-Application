@@ -137,4 +137,49 @@ public class MySqlWeaponDAO extends MySqlDAO implements IWeaponDAOInterface
         return deleted;
     }
 
+    //The insertGun() method inserts a new gun into the database.
+    //It returns true if the gun was inserted successfully, or false if it was not.
+    @Override
+    public boolean insertGun(Weapon gun) throws DAOException
+    {
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        boolean inserted = false;
+
+        try
+        {
+            con = this.getConnection();
+            String query = "INSERT INTO weapon (weapon_name, weapon_type, ammo_capacity, damage, rate_of_fire, weight, reload_time, accuracy, range_of_effectiveness, recoil, attachment_slots, price) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+            ps = con.prepareStatement(query);
+            ps.setString(1, gun.getName());
+            ps.setString(2, gun.getType());
+            ps.setInt(3, gun.getAmmoCapacity());
+            ps.setInt(4, gun.getDamage());
+            ps.setInt(5, gun.getRateOfFire());
+            ps.setFloat(6, gun.getWeight());
+            ps.setFloat(7, gun.getReloadTime());
+            ps.setFloat(8, gun.getAccuracy());
+            ps.setInt(9, gun.getRange());
+            ps.setFloat(10, gun.getRecoil());
+            ps.setInt(11, gun.getAttachmentSlots());
+            ps.setInt(12, gun.getPrice());
+            int rowsAffected = ps.executeUpdate();
+
+            if(rowsAffected > 0)
+            {
+                inserted = true;
+            }
+        }
+        catch (SQLException e)
+        {
+            throw new RuntimeException(e);
+        }
+        finally
+        {
+            this.freeConnection(con);
+        }
+        return inserted;
+    }
+
 }
