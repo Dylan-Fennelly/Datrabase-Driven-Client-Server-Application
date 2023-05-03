@@ -1,5 +1,7 @@
 package org.application.dto;
 
+import org.application.Core.Colours;
+
 public class Attachment
 {
     private int id;
@@ -93,7 +95,7 @@ public Attachment(int id, String name, String type, float weight, float accuracy
     @Override
     public String toString()
     {
-        return "Attachment{" +
+        return Colours.CYAN +"Attachment{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
@@ -104,7 +106,7 @@ public Attachment(int id, String name, String type, float weight, float accuracy
                 ", rateOfFireBonus=" + rateOfFireBonus +
                 ", reloadTimeBonus=" + reloadTimeBonus +
                 ", price=" + price +
-                '}';
+                '}'+ Colours.RESET;
     }
 
 

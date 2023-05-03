@@ -2,6 +2,7 @@ package org.application.Client;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.application.Core.Colours;
 import org.application.Core.Commands;
 import org.application.Core.ServerDetails;
 import org.application.dao.Attachment.AttachmentComparator;
@@ -108,17 +109,22 @@ public class Client
 
     private static void sendCustomWeapon(String customWeapon, PrintWriter output, Scanner input)
     {
+        if(customWeapon.equals(""))
+        {
+            System.out.println(Colours.YELLOW + "Custom weapon not added" + Colours.RESET);
+            return;
+        }
         String message = Commands.ADD_CUSTOM_WEAPON + ServerDetails.BREAKING_CHARACTERS + customWeapon;
         output.println(message);
 
         String response = input.nextLine();
         if(response.equals(Commands.SUCCESS))
         {
-            System.out.println("Custom weapon added");
+            System.out.println(Colours.GREEN +"Custom weapon added"+Colours.RESET);
         }
         else if(response.equals(Commands.ERROR))
         {
-            System.out.println("Custom weapon not added");
+            System.out.println(Colours.RED +"Custom weapon not added"+Colours.RESET);
         }
     }
 
@@ -131,11 +137,11 @@ public class Client
         String compenents[] = response.split(ServerDetails.BREAKING_CHARACTERS);
         if(compenents[1].equals(Commands.SUCCESS))
         {
-            System.out.println("Attachment added");
+            System.out.println(Colours.GREEN +"Attachment added"+Colours.RESET);
         }
         else if(compenents[1].equals(Commands.ERROR))
         {
-            System.out.println("Attachment not added");
+            System.out.println(Colours.RED +"Attachment not added"+Colours.RESET);
         }
     }
 
@@ -149,11 +155,11 @@ public class Client
 
         if(compenents[1].equals(Commands.SUCCESS))
         {
-            System.out.println("Weapon added");
+            System.out.println(Colours.GREEN +"Weapon added"+Colours.RESET);
         }
         else if(compenents[1].equals(Commands.ERROR))
         {
-            System.out.println("Weapon not added");
+            System.out.println(Colours.RED +"Weapon not added"+Colours.RESET);
         }
     }
 
@@ -170,7 +176,7 @@ public class Client
             }
             catch(InputMismatchException ime)
             {
-                System.out.println("Please enter a number");
+                System.out.println(Colours.RED +"Please enter a number"+Colours.RESET);
                 keyboard.nextLine();
             }
         }
@@ -189,7 +195,7 @@ public class Client
             }
             catch(InputMismatchException ime)
             {
-                System.out.println("Please enter a number");
+                System.out.println(Colours.RED +"Please enter a number"+Colours.RESET);
                 keyboard.nextLine();
             }
         }
@@ -313,7 +319,7 @@ public class Client
             if(!found)
             {
                 System.out.println("Weapon not found");
-                System.out.println("Would you like to try again? (Y/N)");
+                System.out.println("Would you like to try again? ("+Colours.GREEN+"Y"+Colours.RESET+"/"+Colours.RED+"N"+Colours.RESET+")");
                 String input = getInput(new Scanner(System.in));
                 if(input.equalsIgnoreCase("Y")||input.equalsIgnoreCase("Yes"))
                 {
@@ -321,14 +327,14 @@ public class Client
                 }
                 else
                 {
-                    return "Cancelled";
+                    return "";
                 }
             }
         }
         List<Integer> attachmentIDs = new ArrayList<>();
         boolean done = false;
         boolean anyAttachments = false;
-        System.out.println("Would you like to add attachments? (Y/N)");
+        System.out.println("Would you like to add attachments? ("+Colours.GREEN+"Y"+Colours.RESET+"/"+Colours.RED+"N"+Colours.RESET+")");
         String userInput = getInput(new Scanner(System.in));
         if(userInput.equalsIgnoreCase("Y")||userInput.equalsIgnoreCase("Yes"))
         {
@@ -343,7 +349,7 @@ public class Client
             System.out.println("Enter the ID of the Attachment");
             int attachmentID = getNumberInt(new Scanner(System.in));
             attachmentIDs.add(attachmentID);
-            System.out.println("Are you done adding attachments? (Y/N)");
+            System.out.println("Are you done adding attachments? ("+Colours.GREEN+"Y"+Colours.RESET+"/"+Colours.RED+"N"+Colours.RESET+")");
             String input = getInput(new Scanner(System.in));
             if(input.equalsIgnoreCase("Y")||input.equalsIgnoreCase("Yes"))
             {
@@ -421,7 +427,7 @@ public class Client
         String components[] = response.split(ServerDetails.BREAKING_CHARACTERS);
         if(components[1].equals("null"))
         {
-            System.out.println("Weapon not found");
+            System.out.println(Colours.RED+"Weapon not found"+Colours.RESET);
             return;
         }
         Gson gson = new Gson();
@@ -441,7 +447,7 @@ public class Client
         String components[] = response.split(ServerDetails.BREAKING_CHARACTERS);
         if(components[1].equals("null"))
         {
-            System.out.println("Attachment not found");
+            System.out.println(Colours.RED+"Attachment not found"+Colours.RESET);
             return;
         }
         Gson gson = new Gson();
@@ -461,7 +467,7 @@ public class Client
         String components[] = response.split(ServerDetails.BREAKING_CHARACTERS);
         if(components[1].equals("null"))
         {
-            System.out.println("Custom Weapon not found");
+            System.out.println(Colours.RED+"Custom Weapon not found"+Colours.RESET);
             return;
         }
         Gson gson = new Gson();

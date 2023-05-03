@@ -1,5 +1,7 @@
 package org.application.dto;
 
+import org.application.Core.Colours;
+
 public class Weapon
 {
     private int id;
@@ -113,7 +115,7 @@ public class Weapon
     @Override
     public String toString()
     {
-        return "Weapon{" +
+        return Colours.CYAN +"Weapon{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
@@ -127,7 +129,7 @@ public class Weapon
                 ", recoil=" + recoil +
                 ", attachmentSlots=" + attachmentSlots +
                 ", price=" + price +
-                '}';
+                '}'+Colours.RESET;
     }
 
     public int getRange()
