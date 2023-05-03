@@ -11,6 +11,7 @@ I learned the following:
 The issues I faced during this assignment were:
 * I had issues with the TCP protocol, I was not sure how to properly close the connection between the client and server
 * I had issues with the DAO design pattern, when accessing a normailzed database
+
 Overall I enjoyed this assignment, I learned a lot about the TCP protocol and how to use it to communicate between a client and server.
 I feel like I have a better understanding of the DAO design pattern and how to use it to access a database.
 I also feel like I have a better understanding of the Command design pattern and how to use it to send data between a client and server.
