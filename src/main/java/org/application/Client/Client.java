@@ -198,20 +198,15 @@ public class Client
     //Gets the clients input as a string for text fields
     private static String getInput(Scanner Keyboard)
     {
-        String input = "";
-        boolean valid = false;
-        while(!valid)
+        //Check if the input contains ' or " and if it does then replace it with a '' or "" so that it can be stored in the database
+        String input = Keyboard.nextLine();
+        if(input.contains("'"))
         {
-            try
-            {
-                input = Keyboard.nextLine();
-                valid = true;
-            }
-            catch(InputMismatchException ime)
-            {
-                System.out.println("Please enter a string");
-                Keyboard.nextLine();
-            }
+            input = input.replace("'", "''");
+        }
+        if(input.contains("\""))
+        {
+            input = input.replace("\"", "\"\"");
         }
         return input;
     }
@@ -301,7 +296,6 @@ public class Client
         weaponFound = null;
         System.out.println("Enter Custom Weapon Nickname");
         String nickname = getInput(new Scanner(System.in));
-        new Scanner(System.in).nextLine();
         boolean found = false;
         while(!found)
         {
@@ -333,6 +327,17 @@ public class Client
         }
         List<Integer> attachmentIDs = new ArrayList<>();
         boolean done = false;
+        boolean anyAttachments = false;
+        System.out.println("Would you like to add attachments? (Y/N)");
+        String userInput = getInput(new Scanner(System.in));
+        if(userInput.equalsIgnoreCase("Y")||userInput.equalsIgnoreCase("Yes"))
+        {
+            done = false;
+        }
+        else
+        {
+            done = true;
+        }
         while(!done)
         {
             System.out.println("Enter the ID of the Attachment");

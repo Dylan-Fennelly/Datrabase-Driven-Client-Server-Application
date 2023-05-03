@@ -40,12 +40,12 @@ CREATE TABLE custom_weapon_attachments (
 );
 --CREATE
 --To add a new weapon:
-INSERT INTO weapon (weapon_id, weapon_name, weapon_type, ammo_capacity, damage, rate_of_fire, weight, reload_time, accuracy, recoil, attachment_slots, price) 
-VALUES (1, 'AK-47', 'Assault Rifle', 30, 45.00, 600, 3.50, 2.50, 70.00, 10.00, 4, 1500);
+INSERT INTO weapon (weapon_name, weapon_type, ammo_capacity, damage, rate_of_fire, weight, reload_time, accuracy, recoil, attachment_slots, price)
+VALUES ('AK-47', 'Assault Rifle', 30, 45.00, 600, 3.50, 2.50, 70.00, 10.00, 4, 1500);
 
 --To add a new attachment:
-INSERT INTO attachment (attachment_id, attachment_name, attachment_type, weight, accuracy_bonus, recoilBonus, damage_bonus, rate_of_fire_bonus, reload_time_bonus, price) 
-VALUES (1, 'Red Dot Sight', 'Sight', 0.50, 10.00, 5.00, 0.00, 0.00, 0.00, 100);
+INSERT INTO attachment (attachment_name, attachment_type, weight, accuracy_bonus, recoilBonus, damage_bonus, rate_of_fire_bonus, reload_time_bonus, price)
+VALUES ('Red Dot Sight', 'Sight', 0.50, 10.00, 5.00, 0.00, 0.00, 0.00, 100);
 
 --To create a custom weapon with attachments:
 --First, insert a new custom weapon into the "custom_weapon" table
