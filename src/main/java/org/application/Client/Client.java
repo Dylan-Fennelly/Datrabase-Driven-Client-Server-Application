@@ -47,6 +47,7 @@ public class Client
                         message = Commands.EXIT_COMMAND;
                         output.println(message);
 
+                        dataSocket.shutdownOutput();
                         response = input.nextLine();
                         if(response.equals(Commands.SESSION_TERMINATED))
                         {
@@ -96,10 +97,6 @@ public class Client
 
                 }
             }
-        }
-        catch (UnknownHostException e)
-        {
-            throw new RuntimeException(e);
         }
         catch (IOException e)
         {

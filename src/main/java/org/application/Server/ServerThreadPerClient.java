@@ -39,55 +39,71 @@ public class ServerThreadPerClient extends Thread
         }
     }
     @Override
-    public void run()
-    {
+    public void run() {
         String incomingMessage = "";
         String response = "";
+        boolean shouldTerminate = false;
+
         try
         {
-            //While the client doesn't want to quit
-            while (!incomingMessage.equals(Commands.EXIT_COMMAND))
+            while (!shouldTerminate)
             {
-                //Wipe the response to make sure we don't send old values
+                // Wipe the response to make sure we don't send old values
                 response = null;
-                //Read a message from the client
-                incomingMessage = input.nextLine();
+                // Read a message from the client
+                try
+                {
+                    incomingMessage = input.nextLine();
+                }
+                catch (Exception e)
+                {
+                    System.out.println("Client #" + number + " has disconnected");
+                    break;
+                }
                 System.out.println("Server received: " + incomingMessage);
 
-                //Break up the message into its components
+                // Break up the message into its components
                 String[] messageParts = incomingMessage.split(ServerDetails.BREAKING_CHARACTERS);
 
-                //Process the message
-                //Use the command factory to create the command object
+                // Process the message
+                // Use the command factory to create the command object
                 CommandFactory commandFactory = new CommandFactory();
                 Command command = CommandFactory.createCommand(messageParts[0]);
-                //Execute the command
+                // Execute the command
                 response = command.createResponse(messageParts);
-                //Print out the response
+                // Print out the response
                 System.out.println("Server sending: " + response);
-                //Send the response back to the client
+                // Send the response back to the client
                 output.println(response);
+
+                // Check if the client has sent a FIN packet
+                if (dataSocket.isInputShutdown())
+                {
+                    shouldTerminate = true;
+                    System.out.println("Received FIN packet from client, sending ACK packet...");
+                    dataSocket.shutdownOutput();
+                }
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             System.out.println(incomingMessage);
-            System.out.println("An exception occurred with client number #" + number +": " + e.getMessage());
+            System.out.println("An exception occurred with client number #" + number + ": " + e.getMessage());
         }
         finally
         {
             try
             {
-                //Shut down the connection
-                System.out.println("Closing the connecting with client number #" + number);
+                // Close the connection
+                System.out.println("Closing the connection with client number #" + number);
                 dataSocket.close();
             }
-            catch(IOException e)
+            catch (IOException e)
             {
                 System.out.println("Unable to disconnect with client number #" + number);
                 System.exit(1);
             }
         }
-
     }
+
 }
