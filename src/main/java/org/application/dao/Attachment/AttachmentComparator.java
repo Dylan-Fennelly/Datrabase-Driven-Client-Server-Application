@@ -22,4 +22,12 @@ public class AttachmentComparator
             return (int) (o1.getWeight() - o2.getWeight());
         }
     };
+    public static final Comparator<Attachment> DAMAGE_COMPARATOR = new Comparator<Attachment>()
+    {
+        @Override
+        public int compare(Attachment o1, Attachment o2)
+        {
+            return (int) (o1.getDamageBonus() - o2.getDamageBonus());
+        }
+    };
 }

@@ -22,4 +22,12 @@ public class WeaponComparator
             return o1.getDamage() - o2.getDamage();
         }
     };
+    public static final Comparator<Weapon> WEIGHT_COMPARATOR = new Comparator<Weapon>()
+    {
+        @Override
+        public int compare(Weapon o1, Weapon o2)
+        {
+            return (int) (o1.getWeight() - o2.getWeight());
+        }
+    };
 }

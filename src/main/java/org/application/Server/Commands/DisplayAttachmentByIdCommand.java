@@ -25,7 +25,7 @@ public class DisplayAttachmentByIdCommand implements Command
         }
         try
         {
-            return response.append(attachmentDao.getAttachmentById(Integer.parseInt(components[1]))).toString();
+            return response.append(attachmentDao.getAttachmentByIdJSON(Integer.parseInt(components[1]))).toString();
         }
         catch (DAOException e)
         {

@@ -18,6 +18,13 @@ public class CustomWeapon
         this.originalWeapon = originalWeapon;
         this.attachments = attachments;
     }
+    public CustomWeapon(String nickname,Weapon originalWeapon, List<Attachment> attachments)
+    {
+        this.id = -1;
+        this.nickname = nickname;
+        this.originalWeapon = originalWeapon;
+        this.attachments = attachments;
+    }
 
     public CustomWeapon(int customWeaponId, String customWeaponName, Weapon weapon)
     {
@@ -26,6 +33,14 @@ public class CustomWeapon
         this.originalWeapon = weapon;
         this.attachments = new ArrayList<>();
     }
+    public CustomWeapon(String customWeaponName, Weapon weapon)
+    {
+        this.id = -1;
+        this.nickname = customWeaponName;
+        this.originalWeapon = weapon;
+        this.attachments = new ArrayList<>();
+    }
+
 
     public int getId()
     {

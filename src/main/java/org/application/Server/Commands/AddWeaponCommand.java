@@ -32,11 +32,11 @@ public class AddWeaponCommand implements Command
         {
             if(weaponDAO.insertGun(weapon))
             {
-                return "Weapon added";
+                return response.append(Commands.SUCCESS).toString();
             }
             else
             {
-                return "Weapon not added";
+                return response.append(Commands.ERROR).toString();
             }
         }
         catch (Exception e)

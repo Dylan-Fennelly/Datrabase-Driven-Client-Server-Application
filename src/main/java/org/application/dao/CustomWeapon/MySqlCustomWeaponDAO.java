@@ -155,6 +155,10 @@ public class MySqlCustomWeaponDAO extends MySqlDAO implements ICustomWeaponDAO
                     }
                 }
             }
+            if(weapon == null && customWeaponName == null&& customAttachments.isEmpty())
+            {
+                return null;
+            }
             customWeapon = new CustomWeapon(customWeaponId, customWeaponName, weapon, customAttachments);
         }
         catch (SQLException e)
