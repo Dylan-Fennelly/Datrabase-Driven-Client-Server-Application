@@ -1,5 +1,7 @@
 package org.application.Server.Commands;
 
+import org.application.Core.Commands;
+import org.application.Core.ServerDetails;
 import org.application.Server.Command;
 import org.application.dao.Attachment.MySqlAttachmentDao;
 
@@ -8,6 +10,9 @@ public class DeleteAttachmentCommand implements Command
     @Override
     public String createResponse(String[] components)
     {
+        StringBuffer response = new StringBuffer();
+        response.append(Commands.DELETE_ATTACHMENT);
+        response.append(ServerDetails.BREAKING_CHARACTERS);
         MySqlAttachmentDao attachmentDao = null;
         try
         {
@@ -21,11 +26,11 @@ public class DeleteAttachmentCommand implements Command
         {
             if(attachmentDao.deleteAttachmentById(Integer.parseInt(components[1])))
             {
-                return "Attachment deleted";
+                return response.append(Commands.SUCCESS).toString();
             }
             else
             {
-                return "Attachment not deleted";
+                return response.append(Commands.ERROR).toString();
             }
         }
         catch (Exception e)

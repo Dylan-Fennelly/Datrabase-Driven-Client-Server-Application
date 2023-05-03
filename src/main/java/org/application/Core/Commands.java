@@ -18,5 +18,6 @@ public class Commands
     public static final String UNRECOGNISED = "UNKNOWN COMMAND";
     public static final String SESSION_TERMINATED = "GOODBYE";
     public static final String ERROR = "ERROR OCCURRED";
+    public static final String SUCCESS = "SUCCESS";
 
 }

@@ -5,7 +5,7 @@ import org.application.Server.Commands.*;
 
 public class CommandFactory
 {
-    public Command createCommand(String command)
+    public static Command createCommand(String command)
     {
         switch (command)
         {
